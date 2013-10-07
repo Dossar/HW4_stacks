@@ -21,3 +21,5 @@
 *.bash
 *.xml
 
+# Ignore Build
+/build

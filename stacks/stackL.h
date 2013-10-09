@@ -72,6 +72,20 @@ extern "C" {
     //    }
 
     
+    
+    
+    
+    
+    
+    /////////////////////////////////////////////////////////////////////////////
+    //            BOOK PAGE 108 HAS A NICE STACK IMPLEMENTATION!!!!!           //
+    /////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    
     /*LINKED LIST STRUCTURE*/
     typedef struct Element {
         StackData *data;

@@ -11,11 +11,11 @@
 
 // This is interchangeable depending on what datatype is needed.
 
-typedef struct {
+typedef struct StackData{
     int i;
 } StackData;
 
-#include "stack.h"
+#include "stackL.h"
 
 #define MAXFILESIZE 100
 

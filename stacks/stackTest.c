@@ -11,8 +11,9 @@
 
 // This is interchangeable depending on what datatype is needed.
 
-typedef struct StackData{
-    int i;
+typedef struct StackData {
+   int i;
+   bool error; // instead of having a rouge value use error codes
 } StackData;
 
 #include "stackL.h"
@@ -22,34 +23,45 @@ typedef struct StackData{
 int main(int argc, char** argv) {
 
 
-    // test out shitty stack.h functions here
+   // test out shitty stack.h functions here
 
 
-    // input from a file
-    FILE *ptr_file;
-    char buffer[MAXFILESIZE];
+   // input from a file
+   FILE *ptr_file;
+   char buffer[MAXFILESIZE];
 
 
-    ptr_file = fopen("expressions.txt", "r");
-    if (!ptr_file) { // if error is encountered or file does not exist
-        return 1;
-    } else { // if no error is encountered
-        while (fgets(buffer, MAXFILESIZE, ptr_file) != NULL) { // get the entire file and put it into an array.
-            printf("%s", buffer); // print out entire file which is stored in buffer
-        }
-    }
+   ptr_file = fopen("expressions.txt", "r");
+   if (!ptr_file) { // if error is encountered or file does not exist
+	  return 1;
+   } else { // if no error is encountered
+	  while (fgets(buffer, MAXFILESIZE, ptr_file) != NULL) { // get the entire file and put it into an array.
+		 printf("%s", buffer); // print out entire file which is stored in buffer
+	  }
+   }
 
-    // tokenize the input of the file into lines
-    // push all matching symbols to the stack
-    // pop all matching symbols from the stack 
-    // print what remains at the end of the line
-    // empty stack
-    // repeat for all lines in file.
-    
-    
-    
+   // tokenize the input of the file into lines
+   // push all matching symbols to the stack
+   // pop all matching symbols from the stack 
+   // print what remains at the end of the line
+   // empty stack
+   // repeat for all lines in file.
 
-    fclose(ptr_file);
-    return (EXIT_SUCCESS);
+   StackData someData;
+   someData->i = 5;
+   someData->error = false;
+
+   Stack stack = initStack();
+   empty(stack);
+   push(stack, someData);
+   push(stack, someData);
+
+
+
+
+
+
+   fclose(ptr_file);
+   return (EXIT_SUCCESS);
 }
 

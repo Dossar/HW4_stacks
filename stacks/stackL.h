@@ -1,6 +1,6 @@
 /* 
  * File:   stack.h
- * Author: mike
+ * Author: mike meding
  *
  * Created on October 7, 2013, 1:50 PM
  */
@@ -15,157 +15,84 @@
 extern "C" {
 #endif
 
-    //    typedef struct Node {
-    //        StackData data;
-    //        Node *next;
-    //    } *top, base;
-    //    
-    //
-    //    void initStack(Node *s) {
-    //        top = NULL;
-    //    }
-    //    
-    //    
-    //    void empty(Node *s){
-    //        while(top != NULL){
-    //            pop(s);
-    //        }
-    //    }
-    //    
+   typedef struct Node {
+	  StackData *data;
+	  struct Node *next;
+   } Node, *NodePtr;
 
-    //    
-    //    
-    //    void push(Node *temp, StackData d){
-    //        if (top == NULL) {
-    //            top = temp;
-    //            temp->data = d;
-    //            top->next = NULL;
-    //        } else {
-    //            temp->next = top;
-    //            top = temp;
-    //        }
-    //    }
-    //    
-    //    StackData pop(Node *s){
-    //        Node *var = top;
-    //        if (var == top) {
-    //            top = top->next;
-    //            free(var);
-    //        } else
-    //            printf("\nStack Empty");
-    //    }
-    //    
-    //    StackData peek(Node *s);
-    //    
-    //    
-    //    void display() {
-    //        struct Node *var = top;
-    //        if (var != NULL) {
-    //            printf("\nElements are as:\n");
-    //            while (var != NULL) {
-    //                printf("\t%d\n", var->Data);
-    //                var = var->next;
-    //            }
-    //            printf("\n");
-    //        } else
-    //            printf("\nStack is Empty");
-    //    }
+   typedef struct stackType {
+	  NodePtr top;
+   } StackType, *Stack;
 
-    
-    
-    
-    
-    
-    
-    /////////////////////////////////////////////////////////////////////////////
-    //            BOOK PAGE 108 HAS A NICE STACK IMPLEMENTATION!!!!!           //
-    /////////////////////////////////////////////////////////////////////////////
-    
-    
-    
-    
-    
-    
-    /*LINKED LIST STRUCTURE*/
-    typedef struct Element {
-        StackData *data;
-        struct Element *next;
-    } Element;
+   /*PROTOTYPES*/
+   void push(Stack stack, StackData data);
 
-    /*PROTOTYPES*/
-    int push(Element **stack, int *data);
+   StackData pop(Stack stack);
 
-    StackData pop(Element **stack, int **data);
-    
-    StackData peek(Element **stack);
+   StackData peek(Stack stack);
 
-    int initStack(Element **stack);
+   Stack initStack(void);
 
-    int empty(Element **stack);
+   void empty(Stack stack);
 
-    bool isEmpty(Element **stack);
+   bool isEmpty(Stack stack);
 
-    ////////////////////////////
+   /////////////////////////////////////////////
 
-    int initStack(Element **stack) {
-        *stack = NULL;
-        return 0;
-    }
+   /* create a new and empty stack */
+   Stack initStack(void) {
+	  Stack sp = (Stack) malloc(sizeof (StackType)); // allocate memory to 
+	  sp -> top = NULL;
+	  return sp;
+   }
 
-    int push(Element **stack, StackData *data) {
-        Element *elem;
-        elem = (Element*) malloc(sizeof (Element*));
-        if (!elem) return 1;
+   /* function will push a new value given by StackData to the stack*/
+   void push(Stack stack, StackData data) {
+	  NodePtr np = (NodePtr) malloc(sizeof (Node));
+	  np ->data = data;
+	  np ->next = stack->top;
+	  stack ->top = np;
+   }
 
-        elem->data->i = data->i;
-        elem->next = *stack;
-        *stack = elem;
-        return 0;
-    }
+   /* will pop the top value off of the stack */
+   StackData pop(Stack stack) {
+	  StackData temp;
+	  if (isEmpty()) { // if an error is found.
+		 temp->error = true; // as this is the error case
+		 temp->i = stack->top->data->i;
+		 return temp;
+	  } else { // if no error is found
+		 NodePtr nodeTemp = stack ->top; // create temp of the head node
+		 temp->i = stack->top->data->i; // set the data to be returned
+		 temp->error = false; // set error code again to be sure.
+		 stack->top = stack->top->next; // move stack to the next value down
+		 free(nodeTemp); // free the previous head node
+		 return temp;
+	  }
 
-    StackData pop(Element **stack, StackData **data) {
-        Element *elem;
-        elem = *stack;
-        if (!elem) return 1;
+   }
 
-        *stack = elem->next;
-        *data->i = (elem->data->i);
-        free(elem);
-        return *data->i;
-    }
-    
-    StackData peek(Element **stack){
-        
-    }
+   StackData peek(Stack stack) {
+	  return stack->top->data;
+   }
 
-    int empty(Element **stack) {
-        Element *next;
+   /* clear entire stack */
+   void empty(Stack stack) {
+	  stack->top = NULL;
+   }
 
-        while (*stack) {
-            next = (*stack)->next;
-            free(*stack);
-            *stack = next;
-        }
-        return 0;
-    }
+   /* function will return true if there are no values in stack */
+   bool isEmpty(Stack stack) {
+	  if (stack ->top == NULL) {
+		 return true;
+	  } else {
+		 return false;
+	  }
+   }
 
-    bool isEmpty(Element **stack) {
-        if (*stack == NULL) {
-            return false; // stack is NULL = no values
-        } else {
-            return true; // stack has values other than NULL
-        }
-    }
-    
-    void display(Element **stack){
-        Element *temp = stack;
-        Element *next;
-        while(*temp){           
-            &next = (*temp)->next;
-            pop(&temp, &temp->data);
-            *temp = next;           
-        }
-    }
+   void display(Stack stack) {
+	  /* Nothing here for now */
+   }
 
 
 

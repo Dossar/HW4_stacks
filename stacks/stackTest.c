@@ -14,7 +14,7 @@
 typedef struct {
    int i;
    bool error; // instead of having a rouge value use error codes
-} *StackData;
+} Data,*StackData;
 
 #include "stackL.h"
 
@@ -46,20 +46,21 @@ int main(int argc, char** argv) {
    // print what remains at the end of the line
    // empty stack
    // repeat for all lines in file.
-   int value  = 5;
    
-   StackData someData;
-   someData->i = value;
+   StackData someData = malloc(sizeof (StackData)); // must allocate memory space first
+   someData->i = 5;
    someData->error = false;
 
-   Stack stack = initStack();
+   Stack stack = initStack(); // initalize stack
    empty(stack);
    push(stack, someData);
-   someData->i = value;
+   someData->i = 3;
    push(stack, someData);
    someData = pop(stack);
 
-   printf("popped value = %d", someData->i);
+   printf("popped value = %d\n", someData->i);
+   someData = pop(stack);
+   printf("popped value again = %d", someData->i);
 
 
 

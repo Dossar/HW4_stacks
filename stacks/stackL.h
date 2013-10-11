@@ -59,7 +59,7 @@ extern "C" {
    /* will pop the top value off of the stack */
    StackData pop(Stack stack) {
 	  StackData temp = malloc(sizeof (StackData));
-	  if (isEmpty(stack)) { // if an error is found.
+	  if (isEmpty(stack)) { // if stack is empty.
 		 temp->error = true; // as this is the error case
 		 temp->i = stack->top->data->i;
 		 return temp;

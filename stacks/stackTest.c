@@ -11,10 +11,10 @@
 
 // This is interchangeable depending on what datatype is needed.
 
-typedef struct StackData {
+typedef struct {
    int i;
    bool error; // instead of having a rouge value use error codes
-} StackData;
+} *StackData;
 
 #include "stackL.h"
 
@@ -46,16 +46,20 @@ int main(int argc, char** argv) {
    // print what remains at the end of the line
    // empty stack
    // repeat for all lines in file.
-
+   int value  = 5;
+   
    StackData someData;
-   someData->i = 5;
+   someData->i = value;
    someData->error = false;
 
    Stack stack = initStack();
    empty(stack);
    push(stack, someData);
+   someData->i = value;
    push(stack, someData);
+   someData = pop(stack);
 
+   printf("popped value = %d", someData->i);
 
 
 

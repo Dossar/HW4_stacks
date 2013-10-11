@@ -16,13 +16,15 @@ extern "C" {
 #endif
 
    typedef struct Node {
-	  StackData *data;
+	  StackData data;
 	  struct Node *next;
    } Node, *NodePtr;
 
    typedef struct stackType {
 	  NodePtr top;
    } StackType, *Stack;
+
+
 
    /*PROTOTYPES*/
    void push(Stack stack, StackData data);
@@ -56,8 +58,8 @@ extern "C" {
 
    /* will pop the top value off of the stack */
    StackData pop(Stack stack) {
-	  StackData temp;
-	  if (isEmpty()) { // if an error is found.
+	  StackData temp = malloc(sizeof (StackData));
+	  if (isEmpty(stack)) { // if an error is found.
 		 temp->error = true; // as this is the error case
 		 temp->i = stack->top->data->i;
 		 return temp;

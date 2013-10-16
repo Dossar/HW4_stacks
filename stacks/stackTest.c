@@ -59,16 +59,26 @@ int main(int argc, char** argv) {
                     case ')':
                         temp = pop(stack);
                         if (temp->error) {
-                            printf("stack pop error\n");
+                            printf("mismatch. encountered '%c' symbol. no opening argument.\n", buffer[y]);
                         } else {
-                            printf("poped '%c'\n", temp->i);
+                            printf("char matched. popping '%c' from stack\n", temp->i);
                         }
                         break;
 
                 }
                 y++;
             }
-        }
+
+            if (!isEmpty(stack)) { // if the stack is NOT empty 
+                printf("mismatch. stack contains '%c'. missing closing argument.\n\n", peek(stack)->i);
+                empty(stack);
+            } else {
+                printf("\n\n"); // too keep with the line pattern.
+            }
+
+
+
+        } // loops to next line in file
     }
 
 
@@ -80,7 +90,7 @@ int main(int argc, char** argv) {
 
 
     fclose(ptr_file);
-    
+
     return (EXIT_SUCCESS);
 }
 

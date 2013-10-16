@@ -17,6 +17,7 @@ typedef struct {
 } Data, *StackData;
 
 #include "stackL.h"
+//#include "stackA.h"
 
 #define MAXFILESIZE 100
 
@@ -78,30 +79,8 @@ int main(int argc, char** argv) {
     // repeat for all lines in file.
 
 
-
-
-
-
-
-    //    int x = 0;
-    //    for (x = 0; x < 10; x++) {
-    //        StackData temp = malloc(sizeof (StackData)); // you need to allocate the memory for each new value
-    //        temp ->i = x; // set values.
-    //        temp ->error = false;
-    //        push(stack, temp);
-    //    }
-    //
-    //    while (!temp->error) {
-    //        temp = pop(stack);
-    //        printf("popped value = %d\n", temp->i);
-    //    }
-    //
-    //    StackData temp2 = peek(stack);
-    //    printf("peeked value = %d\n", temp2->i);
-
-
-
     fclose(ptr_file);
+    
     return (EXIT_SUCCESS);
 }
 

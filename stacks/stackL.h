@@ -15,6 +15,11 @@
 extern "C" {
 #endif
 
+    typedef struct {
+        char i;
+        bool error; // instead of having a rouge value use error codes
+    } Data, *StackData;
+    
     typedef struct Node {
         StackData data;
         struct Node *next;

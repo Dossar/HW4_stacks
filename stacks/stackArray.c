@@ -13,8 +13,8 @@
 
 // This is interchangeable depending on what datatype is needed.
 
-//#include "stackL.h"
-#include "stackA.h"
+#include "stackL.h"
+//#include "stackA.h"
 
 #define MAXFILESIZE 100
 
@@ -40,6 +40,7 @@ int main(int argc, char** argv) {
             while (buffer[y] != '\n') { // loop over all the values of the current line
                 // do not define things within a switch case. compiler will argue with you
                 StackData temp = malloc(sizeof (StackData)); // you need to allocate the memory for each new value
+                StackData peekstuff = malloc(sizeof (StackData)); // you need to allocate the memory for each new value
                 switch (buffer[y]) { // switch for each char in the line
                     case '{':
                     case '[':
@@ -54,20 +55,46 @@ int main(int argc, char** argv) {
                     case '}':
                     case ']':
                     case ')':
+                        
                         temp = pop(stack);
+                        if (buffer[y] == ']' && temp->i != '[')
+                            printf("Closing square bracket not preceded by opening square bracket.\n");
+                        if (buffer[y] == ')' && temp->i != '(')
+                            printf("Closing parentheses not preceded by opening parentheses.\n");
+                        if (buffer[y] == '}' && temp->i != '{')
+                            printf("Closing bracket not preceded by opening bracket.\n");
+                        if (buffer[y] == ']' && temp->i == '[')
+                            printf("Found matching square brackets '[]'.\n");
+                        if (buffer[y] == ')' && temp->i == '(')
+                            printf("Found matching parentheses '()'.\n");
+                        if (buffer[y] == '}' && temp->i == '{')
+                            printf("Found matching brackets '{}'.\n");                       
                         if (temp->error) {
-                            printf("Mismatch. Encountered closing delimiter '%c'. No opening delimiter.\n", buffer[y]);
-                        } else {
-                            printf("Closing delimiter matched. Popping '%c' from stack.\n", temp->i);
+                            printf("Stack contains '%c'. Missing opening argument.\n", buffer[y]);
                         }
                         break;
+
+                        /*
+                        peekstuff = peek(stack);
+                        if( peekstuff->i == '(' && buffer[y] != ')' ){
+                            printf("Found closing parentheses, but it is not preceded by a open parentheses (\n");
+                        }
+                        if( peekstuff->i == '[' && buffer[y] != ']' ){
+                            printf("Found closing square bracket, but it is not preceded by a open square bracket\n");
+                        }
+                        if( peekstuff->i == '{' && buffer[y] != '}' ){
+                            printf("Found closing bracket, but it is not preceded by a open bracket\n");
+                        }                        
+                        temp = pop(stack);                        
+                        break;
+                        */ 
 
                 }
                 y++;
             }
 
             if (!isEmpty(stack)) { // if the stack is NOT empty 
-                printf("Mismatch. Stack contains '%c'. Missing closing delimiter.\n\n", peek(stack)->i);
+                printf("Stack contains '%c'. Missing closing argument.\n\n", peek(stack)->i);
                 empty(stack);
             } else {
                 printf("\n\n"); // too keep with the line pattern.

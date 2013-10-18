@@ -1,11 +1,9 @@
 /* 
- * File:   main.c
+ * File:   checkBrackets.c
  * Author: Roy Van Liew and Mike Meding
  *
  * Created on October 7, 2013, 1:04 PM
  */
-
-/* IMPORTANT: the second case does not work with the parentheses in the middle of the bracket.*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,9 +38,9 @@ int main(int argc, char** argv) {
         while (fgets(buffer, MAXFILESIZE, ptr_file) != NULL) { // get 1 line at a time
 
             if (checkBalanced(buffer)) {
-                printf("STATEMENT IS TRUE\n\n");
+                printf("THE ABOVE STATEMENT IS TRUE.\n\n");
             } else {
-                printf("STATEMENT IS FALSE\n\n");
+                printf("THE ABOVE STATEMENT IS FALSE.\n\n");
             }
 
             //            printf("%s", buffer); // print the line for good measure
@@ -146,7 +144,7 @@ bool checkBalanced(char* buffer) {
 
                 temp = pop(stack);
                 if (temp->error) {
-                    printf("Stack contains '%c'. Missing opening argument.\n\n", buffer[y]);
+                    printf("Stack contains '%c'. Missing opening argument.\n", buffer[y]);
                     return false;
                 } else {
                     if(!isPaired(temp->i, buffer[y])){
@@ -163,12 +161,12 @@ bool checkBalanced(char* buffer) {
     }
 
     if (!isEmpty(stack)) { // if the stack is NOT empty 
-        printf("Stack contains '%c'. Missing closing argument.\n\n", peek(stack)->i);
+        printf("Stack contains '%c'. Missing closing argument.\n", peek(stack)->i);
         empty(stack);
         return false;
 
     } else {
-        printf("\n"); // too keep with the line pattern.
+        //printf("\n"); // too keep with the line pattern.
         if (!pairValue) {
             return false;
         } else {

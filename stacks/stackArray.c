@@ -1,6 +1,6 @@
 /* 
  * File:   main.c
- * Author: Roy Van Liew
+ * Author: Roy Van Liew and Mike Meding
  *
  * Created on October 7, 2013, 1:04 PM
  */
@@ -12,6 +12,11 @@
 #include <stdbool.h>
 
 // This is interchangeable depending on what datatype is needed.
+
+typedef struct {
+    char i;
+    bool error; // instead of having a rouge value use error codes
+} Data, *StackData;
 
 #include "stackL.h"
 //#include "stackA.h"

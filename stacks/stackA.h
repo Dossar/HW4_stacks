@@ -16,11 +16,6 @@ extern "C" {
 
 #define MaxStack 100
 
-    typedef struct {
-        char i;
-        bool error;
-    } Data, *StackData;
-
     typedef struct stackType {
         int top; // For the index of top stack element
         StackData SD[MaxStack]; // Array of the stack elements

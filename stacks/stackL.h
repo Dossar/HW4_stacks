@@ -14,7 +14,7 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+    
     typedef struct Node {
         StackData data;
         struct Node *next;

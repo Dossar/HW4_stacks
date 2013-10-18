@@ -14,6 +14,8 @@ extern "C" {
 
     // Side note: "MaxStack" will be a defined value in the c program to state the max size of the stack.
 
+#define MaxStack 100
+
     typedef struct stackType {
         int top; // For the index of top stack element
         StackData SD[MaxStack]; // Array of the stack elements
@@ -36,34 +38,39 @@ extern "C" {
 
     /* create a new and empty stack */
     Stack initStack(void) {
-      Stack sp = (Stack)malloc(sizeof (StackType)); // stack pointer
-      sp->top = -1; // When initializing, set the top of the stack so when we get into the push function the +1 makes the index 0.
-      return sp; // Return the pointer to the stack.
+        Stack sp = (Stack) malloc(sizeof (StackType)); // stack pointer
+        sp->top = -1; // When initializing, set the top of the stack so when we get into the push function the +1 makes the index 0.
+        return sp; // Return the pointer to the stack.
     }
 
     /* function will push a new value given by StackData to the stack*/
     void push(Stack stack, StackData data) {
 
-      // This if statement checks if the attay stack is already full.
-      if (stack->top == MaxStack - 1) {
-        /* No more space in the stack when top has value (MaxStack - 1)
-           MaxStack is defined within the c program */
-        printf("\nStack Overflow\n"); 
-        exit(1);
-      }
-      ++(stack->top); // Getting to this point means the stack wasn't full. Add 1 to stack->top to keep track of the top of the stack.
-      stack->SD[stack->top] = data; // Saves new value into the top element of the stack, into the SD array.
+        // This if statement checks if the attay stack is already full.
+        if (stack->top == MaxStack - 1) {
+            /* No more space in the stack when top has value (MaxStack - 1)
+               MaxStack is defined within the c program */
+            exit(1);
+        }
+        ++(stack->top); // Getting to this point means the stack wasn't full. Add 1 to stack->top to keep track of the top of the stack.
+        stack->SD[stack->top] = data; // Saves new value into the top element of the stack, into the SD array.
 
     }
 
     /* will pop the top value off of the stack */
     StackData pop(Stack stack) {
 
-      if ( isEmpty(stack) ) exit(1); // If stack is empty, exit the function
-      StackData hold = stack->SD[stack->top]; // Make hold the value in the top of the stack. This way the popped element's value can be returned.
-      --(stack->top); // Make the top position of the stack one less.
-      return hold; // Return the popped element's value.
-
+        StackData temp = malloc(sizeof (StackData));
+        if (isEmpty(stack)) { // if stack is empty.
+            temp->error = true; // as this is the error case
+            temp->i = 0;
+            return temp;
+        } else {
+            temp->i = stack->SD[stack->top]->i; // set the data to be returned
+            temp->error = false; // set error code again to be sure.
+            --(stack->top); // Make the top position of the stack one less.
+            return temp; // Return the popped element's value.
+        }
     }
 
     /* Returns the value current at the head of the stack without removing it
@@ -74,7 +81,10 @@ extern "C" {
 
     /* Clear entire stack */
     void empty(Stack stack) {
-        // Ask if our empty function
+
+        // This while loop continuously calls pop until the top index reaches -1.
+        while (stack->top != -1)
+            pop(stack);
     }
 
     /* function will return true if there are no values in stack */

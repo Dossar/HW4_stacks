@@ -14,7 +14,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>stackArray.c</itemPath>
+      <itemPath>checkBrackets.c</itemPath>
       <itemPath>stackTest.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -40,9 +40,9 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="stackA.h" ex="false" tool="3" flavor2="0">
+      <item path="checkBrackets.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="stackArray.c" ex="false" tool="0" flavor2="0">
+      <item path="stackA.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="stackL.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -70,9 +70,9 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="stackA.h" ex="false" tool="3" flavor2="0">
+      <item path="checkBrackets.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="stackArray.c" ex="false" tool="0" flavor2="0">
+      <item path="stackA.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="stackL.h" ex="false" tool="3" flavor2="0">
       </item>

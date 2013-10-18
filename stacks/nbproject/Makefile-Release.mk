@@ -21,8 +21,8 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=MinGW-Windows
-CND_DLIB_EXT=dll
+CND_PLATFORM=GNU-Linux-x86
+CND_DLIB_EXT=so
 CND_CONF=Release
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -35,7 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/stackArray.o \
+	${OBJECTDIR}/checkBrackets.o \
 	${OBJECTDIR}/stackTest.o
 
 
@@ -57,16 +57,16 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/stacks.exe
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/stacks
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/stacks.exe: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/stacks: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/stacks ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/stackArray.o: stackArray.c 
+${OBJECTDIR}/checkBrackets.o: checkBrackets.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/stackArray.o stackArray.c
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/checkBrackets.o checkBrackets.c
 
 ${OBJECTDIR}/stackTest.o: stackTest.c 
 	${MKDIR} -p ${OBJECTDIR}
@@ -79,7 +79,7 @@ ${OBJECTDIR}/stackTest.o: stackTest.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/stacks.exe
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/stacks
 
 # Subprojects
 .clean-subprojects:
